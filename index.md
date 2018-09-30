@@ -1,4 +1,4 @@
-## Welcome to Oktay's GitHub Pages
+# The Progress Journal
 
-It seems that I will be posting some progress here.
+## Week 1
 
