@@ -1,0 +1,62 @@
+---
+title: "ODD Sales / March 2017"
+author: "oktayekici"
+date: "28 Oct 2018"
+output: html_document
+---
+
+```{r message = FALSE}
+library(dplyr)
+library(tidyverse)
+library(scales)
+```
+
+
+### Gathering the Data
+
+Car sales report of March 2017 is downloaded from **ODD** website and renamed to "odd_retail_sales_2017_03.xlsx". And then the file is uploaded to github.
+
+### Downloading the Raw Data:
+This code is for creating a temporary .xlsx file, downloading raw data from local/github and refine for analysis:
+
+```{r}
+tmp<-tempfile(fileext=".xlsx")
+download.file("https://github.com/MEF-BDA503/pj18-oktayekici/blob/master/odd_retail_sales_2017_03.xlsx?raw=true",destfile=tmp, mode = "wb")
+raw_data<-readxl::read_excel(tmp,skip=7,col_names=FALSE)
+file.remove(tmp)
+raw_data <- raw_data %>% slice(-c(46,47))
+head(raw_data)
+
+```
+
+## Editing Column Names
+
+We are now editing column names for better look:
+
+```{r}
+#Adding column names
+colnames(raw_data) <- c("brand_name","auto_dom","auto_imp","auto_total","comm_dom","comm_imp","comm_total","total_dom","total_imp","total_total")
+#Changing nulls with "0"
+car_data_mar_17 <- raw_data %>% mutate_if(is.numeric,funs(ifelse(is.na(.),0,.)))%>% mutate(year=2017,month=3)
+print(car_data_mar_17,width=Inf)
+```
+
+## Saving Data
+```{r}
+saveRDS(car_data_mar_17,file="~/rodevi/odd_car_sales_data_mar_17.rds")
+```
+## First analysis
+```{r}
+car_data_mar_17 %>% 
+    filter(auto_total > 0 & comm_total > 0) %>%
+    select(brand_name,total_total) %>%
+    arrange(desc(total_total))
+```
+
+Top domestic car productions by brand
+```{r}
+car_data_mar_17 %>% 
+    filter(auto_total > 0 & comm_total > 0) %>%
+    select(brand_name,total_dom) %>%
+    arrange(desc(total_dom))
+```
