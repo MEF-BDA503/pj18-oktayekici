@@ -8,6 +8,6 @@
 
 [ODD Retail Sales Report](https://mef-bda503.github.io/pj18-oktayekici/R_odevi-week5.html)
 
-## Asignment  (31.10.2018)
+## Asignment 3 (31.10.2018)
 
 [EGM Analysis](https://mef-bda503.github.io/pj18-oktayekici/EGM_Assignment.html)
