@@ -342,7 +342,7 @@ head(raw_data)</code></pre>
 ## 6 CHERY           NA     0     0    NA    NA     0     0     0     0</code></pre>
 </div>
 <div id="editing-column-names" class="section level2">
-<h2>Editing Column Names</h2>
+<h3>Editing Column Names</h2>
 <p>We are now editing column names for better look:</p>
 <pre class="r"><code>#Adding column names
 colnames(raw_data) &lt;- c(&quot;brand_name&quot;,&quot;auto_dom&quot;,&quot;auto_imp&quot;,&quot;auto_total&quot;,&quot;comm_dom&quot;,&quot;comm_imp&quot;,&quot;comm_total&quot;,&quot;total_dom&quot;,&quot;total_imp&quot;,&quot;total_total&quot;)
@@ -377,11 +377,11 @@ print(car_data_mar_17,width=Inf)</code></pre>
 ## # ... with 35 more rows</code></pre>
 </div>
 <div id="saving-data" class="section level2">
-<h2>Saving Data</h2>
+<h3>Saving Data</h2>
 <pre class="r"><code>saveRDS(car_data_mar_17,file=&quot;~/rodevi/odd_car_sales_data_mar_17.rds&quot;)</code></pre>
 </div>
 <div id="first-analysis" class="section level2">
-<h2>First analysis</h2>
+<h3>First analysis</h2>
 <pre class="r"><code>car_data_mar_17 %&gt;% 
     filter(auto_total &gt; 0 &amp; comm_total &gt; 0) %&gt;%
     select(brand_name,total_total) %&gt;%
