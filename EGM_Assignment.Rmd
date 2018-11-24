@@ -4,7 +4,7 @@ output: html_document
 ---
 
 ## EGM Analysis  
-###  Oktay Ekici (with Tarýk Özçelik)
+###  Oktay Ekici (with Tarýk Ozcelik)
 ###  31.10.2018
 ```{r message = FALSE}
 library(dplyr)
