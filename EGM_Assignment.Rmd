@@ -1,0 +1,42 @@
+---
+title: "EGM Assignment"
+output: html_document
+---
+
+## EGM Analysis  
+###  Oktay Ekici (with Tarýk Özçelik)
+###  31.10.2018
+```{r message = FALSE}
+library(dplyr)
+library(tidyverse)
+library(scales)
+```
+
+### Download Raw Data
+  Below the excel file is downloaded from github to a local data frame (raw_data) and refined for analysis
+```{r}
+tmpEGM<-tempfile(fileext=".xlsx")
+download.file("https://github.com/MEF-BDA503/pj18-oktayekici/blob/master/egm_example_data.xlsx?raw=true",destfile=tmpEGM,mode="wb")
+EGM_raw_data<-readxl::read_excel(tmpEGM,col_names=TRUE)
+file.remove(tmpEGM)
+head(EGM_raw_data)
+tail(EGM_raw_data)
+```
+
+### Total company   participants
+```{r}
+max_part_number <- EGM_raw_data %>% 
+        group_by(pension_fund_company) %>% 
+        summarise(max(n_of_participants))
+#  filter(auto_total > 0 & comm_total > 0) %>%
+#  select(brand_name,total_total) %>%
+#  arrange(desc(total_total))  %>%
+#  mutate(percentage = percent(total_total/sum(total_total)))
+colnames(max_part_number) <- c("fund_company","max_num")
+
+max_part_number %>% ggplot() + geom_bar(stat="identity",aes(x = fund_company, y = max_num,fill=fund_company))+
+  theme(legend.position = "none", axis.text.x = element_text(angle = 90, 
+    vjust = 0.5, hjust = 0.5, size = 12)) 
+
+
+```
