@@ -349,10 +349,10 @@ monthly_sales %&gt;% ggplot( aes(x=DateFormated, y=total_auto)) +
 </div>
 <div id="market-share-by-brand-name" class="section level3">
 <h3>Market share by brand name</h3>
-<pre class="r"><code>summary &lt;-  car_sales %&gt;% group_by(brand_name) %&gt;% summarize(total_total=sum(total_total))
+<pre class="r"><code>total_car_sales &lt;-  car_sales %&gt;% group_by(brand_name) %&gt;% summarize(total_total=sum(total_total))
 library(ggplot2)
 library(treemapify)   
-ggplot(summary, aes(area = total_total, fill = brand_name, label = brand_name)) +
+ggplot(total_car_sales, aes(area = total_total, fill = brand_name, label = brand_name)) +
   geom_treemap() +
   geom_treemap_text(fontface = &quot;italic&quot;, colour = &quot;white&quot;, place = &quot;centre&quot;,
                     grow = TRUE)</code></pre>
